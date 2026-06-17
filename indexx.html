@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Căutare Invitați</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        text-align: center;
+        background: #f5f5f5;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        font-size: 20px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+    }
+
+    #rezultat {
+        margin-top: 30px;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        min-height: 80px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .masa {
+        color: green;
+        font-size: 40px;
+    }
+
+    .negasit {
+        color: red;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Căutare Invitați</h1>
+
+<input
+    type="text"
+    id="cautare"
+    placeholder="Introduceți numele invitatului..."
+    onkeyup="cautaInvitat()"
+/>
+
+<div id="rezultat">
+    Introduceți numele invitatului.
+</div>
+
+<script>
+
+const invitati = [
+    { nume: "Popescu Ion", masa: "12" },
+    { nume: "Ionescu Maria", masa: "5" },
+    { nume: "Georgescu Andrei", masa: "8" },
+    { nume: "Dima Ionut masa: "422" },
+    { nume: "Dumitrescu Elena", masa: "3" }
+];
+
+function cautaInvitat() {
+
+    const text = document
+        .getElementById("cautare")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const rezultat = document.getElementById("rezultat");
+
+    if (text === "") {
+        rezultat.innerHTML = "Introduceți numele invitatului.";
+        return;
+    }
+
+    const gasit = invitati.find(invitat =>
+        invitat.nume.toLowerCase().includes(text)
+    );
+
+    if (gasit) {
+        rezultat.innerHTML = `
+            ${gasit.nume}<br>
+            <span class="masa">MASA ${gasit.masa}</span>
+        `;
+    } else {
+        rezultat.innerHTML =
+            '<span class="negasit">Invitat negăsit</span>';
+    }
+}
+
+</script>
+
+</body>
+</html>
